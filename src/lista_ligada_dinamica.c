@@ -153,6 +153,30 @@ int tamanhoLista(LISTA l)
     return(count);
 }
 
+bool excluirElemLista(LISTA *l, TIPOCHAVE ch){
+    NO *i;
+    NO *ant;
+    buscaSeqOrd(l,ch,&ant);
+    if (ant) {
+        i = ant->prox;
+        if (ant->prox->prox) {
+          ant->prox = ant->prox->prox;
+
+        } else {
+            ant->prox = NULL;
+        }
+    } else {
+        i = l->inicio;
+        if(l->inicio->prox)
+            l->inicio = l->inicio->prox;
+        else
+            l->inicio = NULL;
+
+    }
+    free(i);
+    return true;
+}
+
 /*
 void anexarElemLista()
 bool excluirElemLista()
@@ -180,10 +204,18 @@ int main()
     inserirElemListaOrd(lista, 52);
     inserirElemListaOrd(lista, 35);
     inserirElemListaOrd(lista, 47);
+
+    exibirLista(*lista);
+    printf("\ntamanho: %d \n", tamanhoLista(*lista));
+
+    excluirElemLista(lista, 1);
+    excluirElemLista(lista, 50);
+    excluirElemLista(lista, 81);
+
     exibirLista(*lista);
 
 
     printf("\n");
-    printf("tamanho %d \n", tamanhoLista(*lista));
+    printf("tamanho: %d \n", tamanhoLista(*lista));
     return 0;
 }
