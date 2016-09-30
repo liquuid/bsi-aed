@@ -177,11 +177,17 @@ bool excluirElemLista(LISTA *l, TIPOCHAVE ch){
     return true;
 }
 
-/*
-void anexarElemLista()
-bool excluirElemLista()
-void destruirLista()
-*/
+
+void destruirLista(LISTA *l){
+    NO *end = l->inicio;
+    while(end){
+        NO *apagar = end;
+        end = end->prox;
+        free(apagar);
+    }
+    l->inicio = NULL;
+}
+
 
 int main()
 {
@@ -213,7 +219,10 @@ int main()
     excluirElemLista(lista, 81);
 
     exibirLista(*lista);
+    printf("\ntamanho: %d \n", tamanhoLista(*lista));
 
+    destruirLista(lista);
+    exibirLista(*lista);
 
     printf("\n");
     printf("tamanho: %d \n", tamanhoLista(*lista));
